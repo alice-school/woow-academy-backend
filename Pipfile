@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 django = "*"
 djangorestframework = "*"
+django-debug-toolbar = "*"
+pymysql = "*"
+mysqlclient = "*"
 
 [dev-packages]
 
