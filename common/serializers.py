@@ -1,0 +1,57 @@
+from rest_framework import serializers
+from apps.users.models import CV_Profile, Objective, Education, Skill, SocialMedia, WorkExperience, VolunteerExperience, Project, Student, Address, Recruiter
+
+class StudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = '__all__'
+    
+class AddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = '__all__'
+        
+class RecruiterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Recruiter
+        fields = '__all__'
+        
+class CV_ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CV_Profile
+        fields = '__all__'
+        
+class ObjectiveSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Objective
+        fields = '__all__'
+        
+class EducationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Education
+        fields = '__all__'
+        
+class SkillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Skill
+        fields = '__all__'
+        
+class SocialMediaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SocialMedia
+        fields = '__all__'
+        
+class WorkExperienceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WorkExperience
+        fields = '__all__'
+        
+class VolunteerExperienceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VolunteerExperience
+        fields = '__all__'
+        
+class ProjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Project
+        fields = '__all__'
