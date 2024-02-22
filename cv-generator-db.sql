@@ -32,7 +32,7 @@ INSERT INTO
     )
 VALUES
     (
-        '1',
+        '2',
         'John',
         'Doe',
         'john_doe',
@@ -94,7 +94,7 @@ INSERT INTO
     )
 VALUES
     (
-        '2',
+        '3',
         'Jane',
         'Doe',
         'jane_doe',

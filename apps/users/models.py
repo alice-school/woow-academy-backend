@@ -10,6 +10,9 @@ class Student(models.Model):
     dob = models.DateField()
     userPassword = models.CharField(max_length=255)
     
+    class Meta:
+        db_table = 'Student'
+    
 class Address(models.Model):
     addressID = models.CharField(max_length=50, primary_key=True)
     userID = models.ForeignKey(Student, on_delete=models.CASCADE)
@@ -17,6 +20,9 @@ class Address(models.Model):
     lineTwo = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     postCode = models.CharField(max_length=255)
+    
+    class Meta:
+        db_table = 'Address'
     
 class Recruiter(models.Model):
     userID = models.CharField(max_length=50, primary_key=True)
@@ -28,6 +34,9 @@ class Recruiter(models.Model):
     phone = models.CharField(max_length=255)
     userPassword = models.CharField(max_length=255)
     
+    class Meta:
+        db_table = 'Recruiter'
+    
 class CV_Profile(models.Model):
     cvID = models.CharField(max_length=50, primary_key=True)
     userID = models.ForeignKey(Student, on_delete=models.CASCADE)
@@ -35,10 +44,16 @@ class CV_Profile(models.Model):
     about = models.TextField()
     points = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     
+    class Meta:
+        db_table = 'CV_Profile'
+    
 class Objective(models.Model):
     objectiveID = models.CharField(max_length=50, primary_key=True)
     cvID = models.ForeignKey(CV_Profile, on_delete=models.CASCADE)
     objective_description = models.TextField()
+    
+    class Meta:
+        db_table = 'Objective'
 
 class Education(models.Model):
     educationID = models.CharField(max_length=50, primary_key=True)
@@ -47,6 +62,9 @@ class Education(models.Model):
     education_course = models.CharField(max_length=255)
     education_start_date = models.DateField()
     education_end_date = models.DateField()
+    
+    class Meta:
+        db_table = 'Education'
 
 class Skill(models.Model):
     skillID = models.CharField(max_length=50, primary_key=True)
@@ -54,11 +72,17 @@ class Skill(models.Model):
     skill_name = models.CharField(max_length=255)
     skill_level = models.CharField(max_length=255)
     
+    class Meta:
+        db_table = 'Skill'
+    
 class SocialMedia(models.Model):
     socialMediaID = models.CharField(max_length=50, primary_key=True)
     cvID = models.ForeignKey(CV_Profile, on_delete=models.CASCADE)
     socialMedia_name = models.CharField(max_length=255)
     socialMedia_link = models.CharField(max_length=255)
+    
+    class Meta:
+        db_table = 'SocialMedia'
     
 class WorkExperience(models.Model):
     workExperienceID = models.CharField(max_length=50, primary_key=True)
@@ -70,6 +94,9 @@ class WorkExperience(models.Model):
     job_description = models.TextField()
     job_address = models.CharField(max_length=255)
     
+    class Meta:
+        db_table = 'WorkExperience'
+    
 class VolunteerExperience(models.Model):
     volunteerExperienceID = models.CharField(max_length=50, primary_key=True)
     cvID = models.ForeignKey(CV_Profile, on_delete=models.CASCADE)
@@ -79,10 +106,16 @@ class VolunteerExperience(models.Model):
     volunteer_end_date = models.DateField()
     volunteer_description = models.TextField()
     
+    class Meta:
+        db_table = 'VolunteerExperience'
+    
 class Project(models.Model):
     projectID = models.CharField(max_length=50, primary_key=True)
     cvID = models.ForeignKey(CV_Profile, on_delete=models.CASCADE)
     project_name = models.CharField(max_length=255)
     project_description = models.TextField()
+    
+    class Meta:
+        db_table = 'Project'
     
 
