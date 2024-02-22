@@ -32,7 +32,7 @@ INSERT INTO
     )
 VALUES
     (
-        '2',
+        '1',
         'John',
         'Doe',
         'john_doe',
@@ -119,13 +119,14 @@ CREATE TABLE
 
 -- insert cv profile table rows
 INSERT INTO
-    CV_Profile (cvID, userID, profile_img, about)
+    CV_Profile (cvID, userID, profile_img, about, points)
 VALUES
     (
         '1',
         '1',
         'https://www.google.com',
-        'I am a software developer'
+        'I am a software developer',
+        10
     );
 
 CREATE TABLE
