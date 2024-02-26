@@ -2,13 +2,13 @@ from rest_framework import serializers
 from apps.users.models import CV_Profile, Objective, Education, Skill, SocialMedia, WorkExperience, VolunteerExperience, Project, Student, Address, Recruiter
 
 class StudentSerializer(serializers.ModelSerializer):
-    userID = serializers.CharField(max_length=50, read_only=True)
+    userID = serializers.CharField(max_length=50)
     firstName = serializers.CharField(max_length=255)
     lastName = serializers.CharField(max_length=255)
     userName = serializers.CharField(max_length=255)
     email = serializers.CharField(max_length=255)
     phone = serializers.CharField(max_length=255)
-    dob = serializers.DateField()
+    dob = serializers.DateField(default='2006-01-01')
     userPassword = serializers.CharField(max_length=255)
     
     class Meta:

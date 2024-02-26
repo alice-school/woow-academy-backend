@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'debug_toolbar',
+    'corsheaders',
     'rest_framework',
     "apps.users"
 ]
@@ -38,6 +39,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 INTERNAL_IPS = [
@@ -76,7 +78,10 @@ DATABASES = {
         'NAME': 'psefop',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': ''
+        'PASSWORD': '',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        },
     }
 }
 
@@ -125,3 +130,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False,
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+]
+
+APPEND_SLASH = True

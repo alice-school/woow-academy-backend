@@ -7,7 +7,7 @@ class Student(models.Model):
     userName = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     phone = models.CharField(max_length=255)
-    dob = models.DateField()
+    dob = models.DateField(default='2006-01-01')
     userPassword = models.CharField(max_length=255)
     
     class Meta:
@@ -41,7 +41,7 @@ class CV_Profile(models.Model):
     cvID = models.CharField(max_length=50, primary_key=True)
     userID = models.ForeignKey(Student, on_delete=models.CASCADE, db_column='userID')
     profile_img = models.TextField()
-    about = models.TextField()
+    about = models.CharField(max_length=255, db_column='about', db_collation='utf8mb4_unicode_ci')
     points = models.IntegerField(max_length=255, validators=[MinValueValidator(0)])
     
     class Meta:

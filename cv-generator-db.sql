@@ -18,6 +18,35 @@ CREATE TABLE
         CONSTRAINT users_pk PRIMARY KEY (userID)
     );
 
+update Student
+set
+    db = '1999-12-12'
+where
+    userID = '1';
+
+INSERT INTO
+    Address (
+        addressID,
+        userID,
+        lineOne,
+        lineTwo,
+        city,
+        postCode
+    )
+VALUES
+    ('1', '1', '43/2', 'Gamagoda', 'Kalutara', '12016');
+
+INSERT INTO
+    CV_Profile (cvID, userID, profile_img, about, points)
+VALUES
+    (
+        '1',
+        '1',
+        'https://avatars.githubusercontent.com/u/50085447?v=4',
+        'Developer 💻 | Tech enthusiast | Former Vice President @sliit-foss | Sub Dev Lead @ms-club-sliit | Student @vueschool | @mlsasrilanka (Alpha)',
+        10
+    );
+
 -- insert student table rows
 INSERT INTO
     Student (
@@ -33,11 +62,11 @@ INSERT INTO
 VALUES
     (
         '1',
-        'John',
-        'Doe',
-        'john_doe',
-        'john@gmail.com',
-        '123456789',
+        'Madhusha',
+        'Prasad',
+        'MadhushaPrasad',
+        'madushaprasad@gmail.com',
+        'pass123',
         '1999-12-12',
         '123456'
     );
@@ -65,7 +94,7 @@ INSERT INTO
         postCode
     )
 VALUES
-    ('1', '1', '123', '456', 'Nairobi', '00100');
+    ('1', '1', '43/2', 'Gamagoda', 'Kalutara', '12016');
 
 CREATE TABLE
     Recruiter (
@@ -98,7 +127,7 @@ VALUES
         'Jane',
         'Doe',
         'jane_doe',
-        'https://www.google.com',
+        'https://avatars.githubusercontent.com/u/50085447?v=4',
         'jh@gmail.com',
         '123456789',
         '123456'
@@ -117,6 +146,16 @@ CREATE TABLE
         CONSTRAINT student_cv_fk FOREIGN KEY (userID) REFERENCES Student (userID) ON DELETE CASCADE ON UPDATE CASCADE
     );
 
+ALTER TABLE CV_Profile MODIFY COLUMN about VARCHAR(255) CHARACTER
+SET
+    utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+update CV_Profile
+set
+    points = 10
+where
+    cvID = '1';
+
 -- insert cv profile table rows
 INSERT INTO
     CV_Profile (cvID, userID, profile_img, about, points)
@@ -124,8 +163,8 @@ VALUES
     (
         '1',
         '1',
-        'https://www.google.com',
-        'I am a software developer',
+        'https://avatars.githubusercontent.com/u/50085447?v=4',
+        'Developer 💻 | Tech enthusiast | Former Vice President @sliit-foss | Sub Dev Lead @ms-club-sliit | Student @vueschool | @mlsasrilanka (Alpha)',
         10
     );
 
@@ -142,7 +181,11 @@ CREATE TABLE
 INSERT INTO
     Objective (objectiveID, cvID, objective_description)
 VALUES
-    ('1', '1', 'I am a software developer');
+    (
+        '1',
+        '1',
+        'Developer 💻 | Tech enthusiast | Former Vice President @sliit-foss | Sub Dev Lead @ms-club-sliit | Student @vueschool | @mlsasrilanka (Alpha)'
+    );
 
 CREATE TABLE
     Education (
@@ -170,10 +213,10 @@ VALUES
     (
         '1',
         '1',
-        'JKUAT',
-        'Computer Science',
-        '2018-01-01',
-        '2022-01-01'
+        'SLIIT',
+        'Software Engineering',
+        '2020-01-01',
+        '2024-01-01'
     );
 
 CREATE TABLE
@@ -190,7 +233,7 @@ CREATE TABLE
 INSERT INTO
     Skill (skillID, cvID, skill_name, skill_level)
 VALUES
-    ('1', '1', 'Python', 'Expert');
+    ('1', '1', 'JavaScript', 'Expert');
 
 CREATE TABLE
     SocialMedia (
@@ -211,7 +254,12 @@ INSERT INTO
         socialMedia_link
     )
 VALUES
-    ('1', '1', 'LinkedIn', 'https://www.linkedin.com');
+    (
+        '2',
+        '1',
+        'GitHub',
+        'https://github.com/MadhushaPrasad'
+    );
 
 CREATE TABLE
     WorkExperience (
@@ -431,3 +479,10 @@ FROM
     JOIN WorkExperience ON CV_Profile.cvID = WorkExperience.cvID
     JOIN VolunteerExperience ON CV_Profile.cvID = VolunteerExperience.cvID
     JOIN Project ON CV_Profile.cvID = Project.cvID;
+
+-- update   CV_Profile.profile_img, in  CV_Profile table
+UPDATE CV_Profile
+SET
+    profile_img = 'https://avatars.githubusercontent.com/u/137147492?v=4'
+WHERE
+    CV_Profile.cvID = '1';
