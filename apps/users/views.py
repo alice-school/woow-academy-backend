@@ -194,7 +194,7 @@ def updateStudentPoints(request, id, points):
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    
+# create cv profile
 @api_view(['POST'])
 def createStudentCVProfile(request):
     data = request.data.copy()

@@ -41,7 +41,7 @@ class CV_Profile(models.Model):
     cvID = models.CharField(max_length=50, primary_key=True)
     userID = models.ForeignKey(Student, on_delete=models.CASCADE, db_column='userID')
     profile_img = models.TextField()
-    about = models.CharField(max_length=255, db_column='about', db_collation='utf8mb4_unicode_ci')
+    about = models.TextField()
     points = models.IntegerField(max_length=255, validators=[MinValueValidator(0)])
     
     class Meta:

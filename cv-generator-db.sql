@@ -43,7 +43,7 @@ VALUES
         '1',
         '1',
         'https://avatars.githubusercontent.com/u/50085447?v=4',
-        'Developer 💻 | Tech enthusiast | Former Vice President @sliit-foss | Sub Dev Lead @ms-club-sliit | Student @vueschool | @mlsasrilanka (Alpha)',
+        'Developer | Tech enthusiast | Former Vice President @sliit-foss | Sub Dev Lead @ms-club-sliit | Student @vueschool | @mlsasrilanka (Alpha)',
         10
     );
 
@@ -96,6 +96,10 @@ INSERT INTO
 VALUES
     ('1', '1', '43/2', 'Gamagoda', 'Kalutara', '12016');
 
+ALTER TABLE CV_Profile MODIFY COLUMN about VARCHAR(255) CHARACTER
+SET
+    utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 CREATE TABLE
     Recruiter (
         userID VARCHAR(50) NOT NULL,
@@ -140,8 +144,8 @@ CREATE TABLE
         cvID VARCHAR(50) NOT NULL,
         userID VARCHAR(50) NOT NULL,
         profile_img TEXT NOT NULL,
-        about TEXT NOT NULL,
-        points INT NOT NULL DEFAULT 0,
+        about LONGTEXT NOT NULL,
+        points INT NOT NULL DEFAULT 'software developer',
         CONSTRAINT cv_profile_pk PRIMARY KEY (cvID),
         CONSTRAINT student_cv_fk FOREIGN KEY (userID) REFERENCES Student (userID) ON DELETE CASCADE ON UPDATE CASCADE
     );
@@ -164,7 +168,7 @@ VALUES
         '1',
         '1',
         'https://avatars.githubusercontent.com/u/50085447?v=4',
-        'Developer 💻 | Tech enthusiast | Former Vice President @sliit-foss | Sub Dev Lead @ms-club-sliit | Student @vueschool | @mlsasrilanka (Alpha)',
+        'Developer | Tech enthusiast | Former Vice President @sliit-foss | Sub Dev Lead @ms-club-sliit | Student @vueschool | @mlsasrilanka (Alpha)',
         10
     );
 
@@ -184,7 +188,7 @@ VALUES
     (
         '1',
         '1',
-        'Developer 💻 | Tech enthusiast | Former Vice President @sliit-foss | Sub Dev Lead @ms-club-sliit | Student @vueschool | @mlsasrilanka (Alpha)'
+        'Developer | Tech enthusiast | Former Vice President @sliit-foss | Sub Dev Lead @ms-club-sliit | Student @vueschool | @mlsasrilanka (Alpha)'
     );
 
 CREATE TABLE
@@ -233,7 +237,7 @@ CREATE TABLE
 INSERT INTO
     Skill (skillID, cvID, skill_name, skill_level)
 VALUES
-    ('1', '1', 'JavaScript', 'Expert');
+    ('1', '1', 'JavaScript', '100/10');
 
 CREATE TABLE
     SocialMedia (
@@ -255,9 +259,39 @@ INSERT INTO
     )
 VALUES
     (
-        '2',
+        '1',
         '1',
         'GitHub',
+        'https://github.com/MadhushaPrasad'
+    );
+
+INSERT INTO
+    SocialMedia (
+        socialMediaID,
+        cvID,
+        socialMedia_name,
+        socialMedia_link
+    )
+VALUES
+    (
+        '2',
+        '1',
+        'LinkedIn',
+        'https://github.com/MadhushaPrasad'
+    );
+
+INSERT INTO
+    SocialMedia (
+        socialMediaID,
+        cvID,
+        socialMedia_name,
+        socialMedia_link
+    )
+VALUES
+    (
+        '3',
+        '1',
+        'Stack Overflow',
         'https://github.com/MadhushaPrasad'
     );
 
@@ -293,8 +327,8 @@ VALUES
         '1',
         'Google',
         'Software Developer',
-        '2018-01-01',
-        '2022-01-01',
+        '2018-12-01',
+        '2022-6-01',
         'I am a software developer',
         'Nairobi'
     );
