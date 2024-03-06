@@ -21,6 +21,8 @@ urlpatterns = [
     path('cv/create', views.createStudentCVProfile),
      # view student cv profile by student id
     path('cv/<id>', views.getStudentCVProfile),
+    # view all student cv profiles
+    path('cv/all', views.getAllStudentCVProfiles),
     # view all addresses
     path('address/all', views.getAllAddresses),
 ]

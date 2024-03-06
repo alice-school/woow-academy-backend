@@ -258,3 +258,10 @@ def getAllAddresses(request):
     queryset = get_list_or_404(Address)
     serializer = AddressSerializer(queryset, many=True)
     return Response(serializer.data)
+
+# view all student cv profiles
+@api_view(['GET'])
+def getAllStudentCVProfiles(request):
+    queryset = get_list_or_404(CV_Profile)
+    serializer = CV_ProfileSerializer(queryset, many=True)
+    return Response(serializer.data)
