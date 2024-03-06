@@ -17,10 +17,10 @@ urlpatterns = [
     path('delete/<id>', views.deleteUser),
     # update student points
     path('points/<id>/<points>', views.updateStudentPoints),
-    
     # create cv profile
     path('cv/create', views.createStudentCVProfile),
-    
      # view student cv profile by student id
     path('cv/<id>', views.getStudentCVProfile),
+    # view all addresses
+    path('address/all', views.getAllAddresses),
 ]

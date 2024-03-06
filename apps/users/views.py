@@ -251,3 +251,10 @@ def createStudentCVProfile(request):
         return Response(responseData, status=status.HTTP_201_CREATED)
     else:
         return Response(cvProfileSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+# view all addresses
+@api_view(['GET'])
+def getAllAddresses(request):
+    queryset = get_list_or_404(Address)
+    serializer = AddressSerializer(queryset, many=True)
+    return Response(serializer.data)
