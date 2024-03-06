@@ -257,11 +257,20 @@ def createStudentCVProfile(request):
 def getAllAddresses(request):
     queryset = get_list_or_404(Address)
     serializer = AddressSerializer(queryset, many=True)
-    return Response(serializer.data)
+    responseData = {
+        'data': serializer.data,
+        'status': status.HTTP_200_OK
+    }
+    return Response(responseData, status=status.HTTP_200_OK)
 
 # view all student cv profiles
 @api_view(['GET'])
 def getAllStudentCVProfiles(request):
+    print("getting all student cv profiles")
     queryset = get_list_or_404(CV_Profile)
     serializer = CV_ProfileSerializer(queryset, many=True)
-    return Response(serializer.data)
+    responseData = {
+        'data': serializer.data,
+        'status': status.HTTP_200_OK
+    }
+    return Response(responseData, status=status.HTTP_200_OK)
