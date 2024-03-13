@@ -43,6 +43,7 @@ class CV_Profile(models.Model):
     profile_img = models.TextField()
     about = models.TextField()
     points = models.IntegerField(max_length=255, validators=[MinValueValidator(0)])
+    gender = models.CharField(max_length=255, default='Not Specified')
     
     class Meta:
         db_table = 'CV_Profile'

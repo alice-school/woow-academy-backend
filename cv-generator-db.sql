@@ -41,7 +41,7 @@ INSERT INTO
 VALUES
     (
         '1',
-        '1',
+        'US2',
         'https://avatars.githubusercontent.com/u/50085447?v=4',
         'Developer | Tech enthusiast | Former Vice President @sliit-foss | Sub Dev Lead @ms-club-sliit | Student @vueschool | @mlsasrilanka (Alpha)',
         10
@@ -186,8 +186,8 @@ INSERT INTO
     Objective (objectiveID, cvID, objective_description)
 VALUES
     (
-        '1',
-        '1',
+        'OBJ1',
+        'CV8',
         'Developer | Tech enthusiast | Former Vice President @sliit-foss | Sub Dev Lead @ms-club-sliit | Student @vueschool | @mlsasrilanka (Alpha)'
     );
 
@@ -215,8 +215,8 @@ INSERT INTO
     )
 VALUES
     (
-        '1',
-        '1',
+        'EDU1',
+        'CV8',
         'SLIIT',
         'Software Engineering',
         '2020-01-01',
@@ -237,7 +237,7 @@ CREATE TABLE
 INSERT INTO
     Skill (skillID, cvID, skill_name, skill_level)
 VALUES
-    ('1', '1', 'JavaScript', '100/10');
+    ('SK1', 'CV8', 'JavaScript', '100/10');
 
 CREATE TABLE
     SocialMedia (
@@ -259,8 +259,8 @@ INSERT INTO
     )
 VALUES
     (
-        '1',
-        '1',
+        'SM1',
+        'CV8',
         'GitHub',
         'https://github.com/MadhushaPrasad'
     );
@@ -274,8 +274,8 @@ INSERT INTO
     )
 VALUES
     (
-        '2',
-        '1',
+        'SM2',
+        'CV8',
         'LinkedIn',
         'https://github.com/MadhushaPrasad'
     );
@@ -289,8 +289,8 @@ INSERT INTO
     )
 VALUES
     (
-        '3',
-        '1',
+        'SM3',
+        'CV8',
         'Stack Overflow',
         'https://github.com/MadhushaPrasad'
     );
@@ -323,8 +323,8 @@ INSERT INTO
     )
 VALUES
     (
-        '1',
-        '1',
+        'WK1',
+        'CV8',
         'Google',
         'Software Developer',
         '2018-12-01',
@@ -359,8 +359,8 @@ INSERT INTO
     )
 VALUES
     (
-        '1',
-        '1',
+        'VE1',
+        'CV8',
         'Google',
         'Software Developer',
         '2018-01-01',
@@ -388,8 +388,8 @@ INSERT INTO
     )
 VALUES
     (
-        '1',
-        '1',
+        'PJ1',
+        'CV8',
         'Project 1',
         'I am a software developer'
     );

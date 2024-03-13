@@ -19,7 +19,7 @@ urlpatterns = [
     path('points/<id>/<points>', views.updateStudentPoints),
     # create cv profile
     path('cv/create', views.createStudentCVProfile),
-     # view student cv profile by student id
+    # view student cv profile by student id
     path('cv/<id>', views.getStudentCVProfile),
     # view all student cv profiles
     path('cvProfile/all', views.getAllStudentCVProfiles),

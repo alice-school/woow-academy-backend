@@ -78,7 +78,7 @@ DATABASES = {
         'NAME': 'psefop',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': '12345678',
         'OPTIONS': {
             'charset': 'utf8mb4',
         },
