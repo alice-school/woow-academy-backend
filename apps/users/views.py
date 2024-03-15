@@ -1,13 +1,10 @@
 from django.shortcuts import get_list_or_404,get_object_or_404
 from django.shortcuts import render
-from django.http import HttpResponse
 from common.serializers import StudentSerializer, AddressSerializer, RecruiterSerializer, CV_ProfileSerializer, ObjectiveSerializer, EducationSerializer, SkillSerializer, SocialMediaSerializer, WorkExperienceSerializer, VolunteerExperienceSerializer, ProjectSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Student, Address, Recruiter, CV_Profile, Objective, Education, Skill, SocialMedia, WorkExperience, VolunteerExperience, Project
-from django.utils import timezone
-
 # create new user
 @api_view(['POST'])
 def createUser(request):
