@@ -116,8 +116,10 @@ def viewAllUsers(request):
 # get user profile details
 @api_view(['GET'])
 def getUserProfile(request, id):    
+    print("getting user profile",id)
     try:
         user = Student.objects.get(userID=id)
+        print(user)
     except Student.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     
@@ -126,50 +128,13 @@ def getUserProfile(request, id):
 
 @api_view(['GET'])
 def getStudentCVProfile(request, id):
-    print("getting student cv profile",id)
     try:
-        user = get_object_or_404(Student, pk=id)
-        address = get_object_or_404(Address, userID=user.userID)
-        cvProfile = get_object_or_404(CV_Profile, userID=id)
-        objective = get_object_or_404(Objective, cvID=cvProfile.cvID)
-        education = get_list_or_404(Education, cvID=cvProfile.cvID)
-        skill = get_list_or_404(Skill, cvID=cvProfile.cvID)
-        socialMedia = get_list_or_404(SocialMedia, cvID=cvProfile.cvID)
-        workExperience = get_list_or_404(WorkExperience, cvID=cvProfile.cvID)
-        volunteerExperience = get_list_or_404(VolunteerExperience, cvID=cvProfile.cvID)
-        project = get_list_or_404(Project, cvID=cvProfile.cvID)
-
-        # Serialize the data
-        userSerializer = StudentSerializer(user)
-        addressSerializer = AddressSerializer(address)
-        cvProfileSerializer = CV_ProfileSerializer(cvProfile)
-        objectiveSerializer = ObjectiveSerializer(objective)
-        educationSerializer = EducationSerializer(education, many=True)
-        skillSerializer = SkillSerializer(skill, many=True)
-        socialMediaSerializer = SocialMediaSerializer(socialMedia, many=True)
-        workExperienceSerializer = WorkExperienceSerializer(workExperience, many=True)
-        volunteerExperienceSerializer = VolunteerExperienceSerializer(volunteerExperience, many=True)
-        projectSerializer = ProjectSerializer(project, many=True)
-
-        responseData = {
-            'data':{
-                'student': userSerializer.data,
-                'address': addressSerializer.data,
-                'cvProfile': cvProfileSerializer.data,  
-                'objective': objectiveSerializer.data,
-                'education': educationSerializer.data,
-                'skill': skillSerializer.data,
-                'socialMedia': socialMediaSerializer.data,
-                'workExperience': workExperienceSerializer.data,
-                'volunteerExperience': volunteerExperienceSerializer.data,
-                'project': projectSerializer.data
-            },
-            'status': status.HTTP_200_OK
-        }
-
-        return Response(responseData, status=status.HTTP_200_OK)
-    except Student.DoesNotExist:
+        cvProfile = CV_Profile.objects.get(userID=id)
+    except CV_Profile.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = CV_ProfileSerializer(cvProfile)
+    return Response(serializer.data)
     
 #  update CV_Profile points
 @api_view(['PUT'])
@@ -265,6 +230,17 @@ def getAllAddresses(request):
     }
     return Response(responseData, status=status.HTTP_200_OK)
 
+# view address by user id
+@api_view(['GET'])
+def getAddressByUserID(request, id):
+    try:
+        address = Address.objects.get(userID=id)
+    except Address.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = AddressSerializer(address)
+    return Response(serializer.data)
+
 # view all student cv profiles
 @api_view(['GET'])
 def getAllStudentCVProfiles(request):
@@ -281,7 +257,8 @@ def getAllStudentCVProfiles(request):
 @api_view(['GET'])
 def getAllSocialMediaLinks(request, id):
     try:
-        socialMedia = get_list_or_404(SocialMedia, cvID=id)
+        cvProfile = CV_Profile.objects.get(userID=id)
+        socialMedia = get_list_or_404(SocialMedia, cvID=cvProfile.cvID)
         serializer = SocialMediaSerializer(socialMedia, many=True)
         responseData = {
             'data': serializer.data,
