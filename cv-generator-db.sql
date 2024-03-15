@@ -260,7 +260,7 @@ INSERT INTO
 VALUES
     (
         'SM1',
-        'CV8',
+        'CV1',
         'GitHub',
         'https://github.com/MadhushaPrasad'
     );
@@ -275,7 +275,7 @@ INSERT INTO
 VALUES
     (
         'SM2',
-        'CV8',
+        'CV1',
         'LinkedIn',
         'https://github.com/MadhushaPrasad'
     );
@@ -290,7 +290,7 @@ INSERT INTO
 VALUES
     (
         'SM3',
-        'CV8',
+        'CV1',
         'Stack Overflow',
         'https://github.com/MadhushaPrasad'
     );
