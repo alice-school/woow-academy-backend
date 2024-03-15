@@ -25,8 +25,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'debug_toolbar',
+    'corsheaders',
     'rest_framework',
-    "apps.users"
+    "apps.users",
+    "apps.industry"
 ]
 
 MIDDLEWARE = [
@@ -37,6 +40,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 INTERNAL_IPS = [
@@ -70,9 +74,15 @@ WSGI_APPLICATION = "config.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'psefop',
+        'HOST': 'localhost',
+        'USER': 'root',
+        'PASSWORD': '12345678',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        },
     }
 }
 
@@ -117,3 +127,18 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    'COERCE_DECIMAL_TO_STRING': False,
+}
+
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+]
+
+APPEND_SLASH = True
