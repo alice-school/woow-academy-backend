@@ -1,3 +1,4 @@
+import requests
 from django.shortcuts import get_list_or_404,get_object_or_404
 from django.shortcuts import render
 from common.serializers import StudentSerializer, AddressSerializer, RecruiterSerializer, CV_ProfileSerializer, ObjectiveSerializer, EducationSerializer, SkillSerializer, SocialMediaSerializer, WorkExperienceSerializer, VolunteerExperienceSerializer, ProjectSerializer
@@ -264,3 +265,143 @@ def getAllSocialMediaLinks(request, id):
         return Response(responseData, status=status.HTTP_200_OK)
     except SocialMedia.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['POST'])
+def createStudentResumeProfile(request):
+    requestData = request.data.copy()
+    print(requestData)
+    
+    try:
+        # create cv profile
+        cvProfileSerializer = CV_ProfileSerializer(data=requestData['cvProfile'])
+        if cvProfileSerializer.is_valid():
+            cvProfileSerializer.save()
+        else:
+            return Response(cvProfileSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        # create objective
+        objectiveSerializer = ObjectiveSerializer(data=requestData['objective'])
+        if objectiveSerializer.is_valid():
+            objectiveSerializer.save()
+        else:
+            return Response(objectiveSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        # create education -> eduction is a list of objects so we need to loop through the list and save each object
+        educationData = requestData['education']
+        for education in educationData:
+            educationSerializer = EducationSerializer(data=education)
+            if educationSerializer.is_valid():
+                educationSerializer.save()
+            else:
+                return Response(educationSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        # create skill -> skill is a list of objects so we need to loop through the list and save each object
+        skillData = requestData['skill']
+        for skill in skillData:
+            skillSerializer = SkillSerializer(data=skill)
+            if skillSerializer.is_valid():
+                skillSerializer.save()
+            else:
+                return Response(skillSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
+        # create social media -> social media is a list of objects so we need to loop through the list and save each object
+        socialMediaData = requestData['socialMedia']
+        for socialMedia in socialMediaData:
+            socialMediaSerializer = SocialMediaSerializer(data=socialMedia)
+            if socialMediaSerializer.is_valid():
+                socialMediaSerializer.save()
+            else:
+                return Response(socialMediaSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
+        # create work experience -> work experience is a list of objects so we need to loop through the list and save each object
+        workExperienceData = requestData['workExperience']
+        for workExperience in workExperienceData:
+            workExperienceSerializer = WorkExperienceSerializer(data=workExperience)
+            if workExperienceSerializer.is_valid():
+                workExperienceSerializer.save()
+            else:
+                return Response(workExperienceSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
+        # create volunteer experience -> volunteer experience is a list of objects so we need to loop through the list and save each object
+        volunteerExperienceData = requestData['volunteerExperience']
+        for volunteerExperience in volunteerExperienceData:
+            volunteerExperienceSerializer = VolunteerExperienceSerializer(data=volunteerExperience)
+            if volunteerExperienceSerializer.is_valid():
+                volunteerExperienceSerializer.save()
+            else:
+                return Response(volunteerExperienceSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
+        # create project -> project is a list of objects so we need to loop through the list and save each object
+        projectData = requestData['project']
+        for project in projectData:
+            projectSerializer = ProjectSerializer(data=project)
+            if projectSerializer.is_valid():
+                projectSerializer.save()
+            else:
+                return Response(projectSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
+        responseData = {
+            "data": requestData,
+            'message': 'Resume profile created successfully',
+            'status': status.HTTP_201_CREATED
+        }
+    
+        return Response(responseData, status=status.HTTP_201_CREATED)
+    except Exception as e:
+        print(e)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+# @api_view(['GET'])
+# def get_linkedin_data(request):
+#     url = 'https://nubela.co/proxycurl/api/v2/linkedin'
+#     params = {
+#         'url': 'https://www.linkedin.com/in/',
+#         'skills': 'include',
+#     }
+#     headers = {
+#         'Authorization': 'Bearer Token HeayQqdLjYhPeRs07UEGGA',
+#         'Accept': 'application/json',
+#         'Content-Type': 'application/json',
+#         'Access-Control-Allow-Origin': '*',
+#         'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+#         'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+#         'Access-Control-Allow-Credentials': 'true',
+#     }
+    
+#     try:
+#         response = request.get(url, params=params, headers=headers)
+#         response.raise_for_status()
+#         return Response(response.json(), status=status.HTTP_200_OK)
+#     except request.exceptions.RequestException as e:
+#         return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def get_linkedin_data(request):
+    
+    url = 'https://nubela.co/proxycurl/api/v2/linkedin'
+
+    params = {
+        'url': request.GET.get('url'),
+        'skills': request.GET.get('skills'),
+    }
+    
+    
+    print(params)
+    
+    headers = {
+        'Authorization': 'Bearer 3_gr3ltdWpwEBPn--JU9aw',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+        'Access-Control-Allow-Credentials': 'true',
+    }
+    
+    try:
+        response = requests.get(url, params=params, headers=headers)
+        response.raise_for_status()
+        return Response(response.json(), status=status.HTTP_200_OK)
+
+    except requests.RequestException as e:
+        return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

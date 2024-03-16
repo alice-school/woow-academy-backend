@@ -30,4 +30,10 @@ urlpatterns = [
     
     # view social media by student id
     path('socialMedia/<id>', views.getAllSocialMediaLinks),
+    
+    # view LinkedIn by student linkedin id
+    path('linkedin-data/', views.get_linkedin_data),
+    
+    # create fully detailed cv profile
+    path('cv/create/full', views.createStudentResumeProfile),
 ]
